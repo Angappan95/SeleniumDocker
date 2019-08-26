@@ -37,7 +37,7 @@ public class Commons {
 			options.setHeadless(true);
 			options.addArguments("window-size=1920,1080");
 			options.merge(capabilities);
-			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),options);
+			driver = new RemoteWebDriver(new URL("http://35.208.9.235:4444/wd/hub"),options);
 		}
 		else if (browser.toLowerCase().contentEquals("firefox")){
 			DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -47,7 +47,7 @@ public class Commons {
 			options.setHeadless(true);
 //			options.addArguments("window-size=1920,1080");
 			options.merge(capabilities);
-			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),options);
+			driver = new RemoteWebDriver(new URL("http://35.208.9.235:4444/wd/hub"),options);
 		}
 		else{
 			System.out.println("Invalid Browser selection.");
