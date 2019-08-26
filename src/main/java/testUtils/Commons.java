@@ -34,20 +34,20 @@ public class Commons {
 			capabilities.setCapability("version","");
 			capabilities.setPlatform(Platform.LINUX);
 			ChromeOptions options = new ChromeOptions();
-			options.setHeadless(true);
+//			options.setHeadless(true);
 			options.addArguments("window-size=1920,1080");
 			options.merge(capabilities);
-			driver = new RemoteWebDriver(new URL("http://35.208.9.235:4444/wd/hub"),options);
+			driver = new RemoteWebDriver(new URL("http://35.209.196.86:4444/wd/hub"),options);
 		}
 		else if (browser.toLowerCase().contentEquals("firefox")){
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.setBrowserName("firefox");
 			capabilities.setPlatform(Platform.LINUX);
 			FirefoxOptions options = new FirefoxOptions();
-			options.setHeadless(true);
+//			options.setHeadless(true);
 //			options.addArguments("window-size=1920,1080");
 			options.merge(capabilities);
-			driver = new RemoteWebDriver(new URL("http://35.208.9.235:4444/wd/hub"),options);
+			driver = new RemoteWebDriver(new URL("http://35.209.196.86:4444/wd/hub"),options);
 		}
 		else{
 			System.out.println("Invalid Browser selection.");
