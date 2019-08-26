@@ -4,10 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 import javax.imageio.ImageIO;
@@ -24,21 +26,31 @@ public class Commons {
 	public static WebDriver driver;
 	private String baseUrl;
 
-	@BeforeMethod
+	@BeforeTest
 	@Parameters("browser")
-	public void setUp(String browser ) throws Exception {
-
-		if(browser.toLowerCase() == "chrome") {
+	public void setUp(String browser) throws Exception {
+		if(browser.toLowerCase().contentEquals("chrome")) {
 			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 			capabilities.setCapability("version","");
 			capabilities.setPlatform(Platform.LINUX);
-			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),capabilities);
+			ChromeOptions options = new ChromeOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920,1080");
+			options.merge(capabilities);
+			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),options);
+		}
+		else if (browser.toLowerCase().contentEquals("firefox")){
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setBrowserName("firefox");
+			capabilities.setPlatform(Platform.LINUX);
+			FirefoxOptions options = new FirefoxOptions();
+			options.setHeadless(true);
+//			options.addArguments("window-size=1920,1080");
+			options.merge(capabilities);
+			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),options);
 		}
 		else{
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability("version","");
-			capabilities.setPlatform(Platform.LINUX);
-			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),capabilities);
+			System.out.println("Invalid Browser selection.");
 		}
 
 		baseUrl = "https://www.iotium.io/";
@@ -47,7 +59,7 @@ public class Commons {
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 
-	@AfterMethod
+	@AfterTest
 	public void tearDown() throws Exception {
 		driver.quit();
 	}

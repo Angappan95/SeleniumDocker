@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Iot_Test_Suite" parallel="methods" thread-count="2">
-  <parameter name="browser" value="firefox"></parameter>
-  <test thread-count="5" name="Iot_Test">
+<suite name="Iot_Test_Suite" thread-count="2">
+  <test name="Test_Chrome">
+    <parameter name="browser" value="chrome"></parameter>
+    <classes>
+      <class name="iot_test.TestIOT"/>
+    </classes>
+  </test>
+  <test name="Test_Firefox">
+    <parameter name="browser" value="firefox"></parameter>
     <classes>
       <class name="iot_test.TestIOT"/>
     </classes>
