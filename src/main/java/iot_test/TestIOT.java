@@ -19,8 +19,8 @@ import java.util.List;
 
 public class TestIOT extends Commons {
 
-    @Test // Verify the Iotium text and the logo
-    public void validateLogo() throws IOException, InterruptedException {
+    @Test(enabled = false) // Verify the Iotium text and the logo
+    public void validateLogo() throws IOException {
         // Get Logo urls from website
         List<WebElement> logos = driver.findElements(By.xpath("//span[@class='logo']/descendant::img"));
 
